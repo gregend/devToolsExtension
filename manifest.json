@@ -1,0 +1,27 @@
+{
+   "name": "DevTools",
+   "version": "1.0",
+   "manifest_version": 2,
+   "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+   "permissions": [
+      "tabs",
+      "contextMenus",
+      "declarativeContent",
+      "clipboardWrite"
+   ],
+   "page_action": {
+      "default_popup": "popup.html"
+   },
+   "content_scripts": [{
+      "matches": ["<all_urls>"],
+      "js": ["sdk/content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+   }],
+   "web_accessible_resources": [
+      "sdk/frame.js"
+   ]
+}

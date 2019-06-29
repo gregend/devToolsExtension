@@ -1,0 +1,48 @@
+.popup-container {
+   width: 450px;
+   height: 200px;
+   background: #111;
+   padding: 20px 15px;
+   display: flex;
+   flex-direction: column;
+}
+.scripts-button {
+   margin-top: 10px;
+   background: #7FDBFF;
+   color: #111;
+   width: 50px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   outline: none;
+   border: 0px;
+   border-radius: 3px;
+   font-size: 0.8rem;
+   padding: 5px;
+}
+.scripts-input-container {
+   display: flex;
+   flex-direction: column;
+   align-items: right;
+   justify-content: center;
+}
+.scripts-input {
+   outline: none;
+   background: #ddd;
+   color: #001F3F;
+   border: 0px;
+   padding: 5px;
+   font-size: 1rem;
+}
+.scripts-input-label {
+   margin-top: 1px;
+   margin-bottom: 5px;
+   font-size: 0.7rem;
+   color: #aaa;
+}
+.scripts-button-container {
+   display: flex;
+   width: 100%;
+   align-items: right;
+   justify-content: right;
+}

@@ -1,4 +1,25 @@
-console.info('frame script');
+const copyToClipboard = (str, displayElement, elementClass) => {
+   const element = document.createElement('textarea');
+   element.classList = elementClass;
+   element.value = str;
+   document.body.appendChild(element);
+   const selected =
+      document.getSelection().rangeCount > 0
+         ? document.getSelection().getRangeAt(0)
+         : false;
+   element.select();
+   document.execCommand('copy');
+   if (!displayElement) { 
+      document.body.removeChild(el);
+   }
+   document.getSelection().removeAllRanges();
+   if (selected) {
+      document.getSelection().addRange(selected);
+   }
+};
+
+const saveOpenAppInClipboard = data => copyToClipboard(data, true, 'open-app-textarea');
+
 window.addEventListener("message", async event => {
    if (event.source != window)
       return;
@@ -7,17 +28,20 @@ window.addEventListener("message", async event => {
       switch (action) {
          case 'getFrameParameters': {
             try {
-               const regex = /([a-z]+)?:\/\/([a-z0-9-]+)-([a-z]+)([\.a-z0-9]+)?\/?([\/a-z\.]+)?(\?.+)?/;
-               const initialData = await PulseSDK.api.apps.getInitialData();
+               const regex = /([a-z]+)?:\/\/([a-z0-9-]+)-([a-z]+)([\.a-z0-9]+)?\/?([\/a-z1-9-\.]+)?(\?.+)?/;
+               const initialData = PulseSDK ? await PulseSDK.api.apps.getInitialData() : {};
                const frameUrl = payload.data.frameUrl.replace('-proxy', '');
                const [url, protocol, namespace, app, domain, path] = regex.exec(frameUrl);
                const openAppOptions = {
                   path,
                   initialData
                };
-               const openAppParams = [app, app, openAppOptions];
-               const openApp = `PulseSDK.api.apps.openApp('${app}', '${app}', ${JSON.stringify(openAppOptions)})`
-               console.log(openApp);
+               const title = app.split('').map((s, i) => i === 0 ? s.toUpperCase() : s).join('')
+               const openApp = 'PulseSDK.api.apps.openApp(\n' +
+                  `  '${app}',\n` +
+                  `  '${title}',\n` +
+                   `  ${JSON.stringify(openAppOptions, null, 2)})`;
+               saveOpenAppInClipboard(openApp);
             } catch (error) {
                console.error(error);
             }

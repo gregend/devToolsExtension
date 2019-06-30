@@ -8,12 +8,13 @@
     },
    "permissions": [
       "tabs",
+      "storage",
       "contextMenus",
       "declarativeContent",
       "clipboardWrite"
    ],
    "page_action": {
-      "default_popup": "popup.html"
+      "default_popup": "popup/popup.html"
    },
    "content_scripts": [{
       "matches": ["<all_urls>"],
@@ -22,6 +23,7 @@
       "all_frames": true
    }],
    "web_accessible_resources": [
-      "sdk/frame.js"
+      "sdk/frame.js",
+      "sdk/sdk.css"
    ]
 }

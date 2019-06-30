@@ -1,0 +1,15 @@
+.open-app-textarea {
+   resize: both;
+   background: red;
+   position: absolute;
+   z-index: 99999;
+   background: black;
+   width: 300px;
+   height: 100px;
+   opacity: 0.6;
+   position: fixed;
+   left: 0;
+   top: 0;
+   color: white;
+
+}

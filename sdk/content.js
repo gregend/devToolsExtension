@@ -43,9 +43,9 @@ const injectScript = url => {
 const injectSdkScript = injectScript(chrome.runtime.getURL('./sdk/frame.js'));
 const customScriptInjection = async () => {
    const scriptsFrameInput = await getFromStorage('scriptsFrameInput');
-   if (scriptsFrameInput.includes(window.location.host)) {
+   if (scriptsFrameInput && scriptsFrameInput.includes(window.location.host)) {
       const scriptsSourceInput = await getFromStorage('scriptsSourceInput');
-      injectScript(scriptsSourceInput)();
+      injectScript(scriptsSourceInput)(false);
    }
 }
 /**

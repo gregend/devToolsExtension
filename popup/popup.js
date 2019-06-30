@@ -55,7 +55,7 @@ const saveInputsData = inputs => async () => {
    return setInStorage(dataToSave);
 };
 
-const button = getElement('scripts-reload-button');
+const button = getElement('scripts-save-button');
 const inputs = ['scripts-frame-input', 'scripts-source-input'];
 button.onclick = saveInputsData(inputs);
 getInputsInitialData(inputs);

@@ -24,6 +24,7 @@
    }],
    "web_accessible_resources": [
       "sdk/frame.js",
-      "sdk/sdk.css"
+      "sdk/sdk.css",
+      "popup/popup.js"
    ]
 }

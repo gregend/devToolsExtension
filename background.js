@@ -2,7 +2,15 @@ chrome.contextMenus.create({
    title: 'Generate openApp',
    id: 'DevToolsGenerateOpenApp',
 });
-
+chrome.contextMenus.create({
+   title: 'Inject script into this frame',
+   id: 'DevToolsInjectScript',
+});
+const setInStorage = data => new Promise(resolve => {
+   chrome.storage.sync.set(data, () => {
+      resolve('Data set');
+   });
+});
 /**
  * Sends events to the frame where context menu option was clicked in
  */
@@ -18,9 +26,11 @@ chrome.contextMenus.onClicked.addListener((event, tab) => {
             }
          }, {
             frameId
-         }, function (response) {
-            console.log(response);
          });
+      }
+      case 'DevToolsInjectScript': {
+         setInStorage({ scriptsFrameInput: event.frameUrl });
+         break;
       }
       default:
          break;

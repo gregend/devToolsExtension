@@ -1,4 +1,4 @@
-const copyToClipboard = (str, displayElement, elementClass) => {
+const copyToClipboard = (str, displayElement, elementClass, timeAlive = 0) => {
    const element = document.createElement('textarea');
    element.classList = elementClass;
    element.value = str;
@@ -9,8 +9,8 @@ const copyToClipboard = (str, displayElement, elementClass) => {
          : false;
    element.select();
    document.execCommand('copy');
-   if (!displayElement) { 
-      document.body.removeChild(el);
+   if (!displayElement || timeAlive) {
+      setTimeout(() => document.body.removeChild(element), timeAlive);
    }
    document.getSelection().removeAllRanges();
    if (selected) {
@@ -18,7 +18,7 @@ const copyToClipboard = (str, displayElement, elementClass) => {
    }
 };
 
-const saveOpenAppInClipboard = data => copyToClipboard(data, true, 'open-app-textarea');
+const saveOpenAppInClipboard = data => copyToClipboard(data, true, 'open-app-textarea', 5000);
 
 window.addEventListener("message", async event => {
    if (event.source != window)

@@ -28,7 +28,7 @@ window.addEventListener("message", async event => {
       switch (action) {
          case 'getFrameParameters': {
             try {
-               const regex = /([a-z]+)?:\/\/([a-z0-9-]+)-([a-z]+)([\.a-z0-9]+)?\/?([\/a-z1-9-\.]+)?(\?.+)?/;
+               const regex = /([a-z]+)?:\/\/([a-z0-9-]+)-([a-z]+)([\.a-z0-9]+)?\/?([\/a-z0-9-\.]+)?(\?.+)?/;
                const initialData = PulseSDK ? await PulseSDK.api.apps.getInitialData() : {};
                const frameUrl = payload.data.frameUrl.replace('-proxy', '');
                const [url, protocol, namespace, app, domain, path] = regex.exec(frameUrl);
